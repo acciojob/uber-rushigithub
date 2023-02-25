@@ -3,32 +3,47 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "TripBooking")
 public class TripBooking{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int tripBookingId;
+    int tripBookingId;
 
-    private String fromLocation; //The start location of the trip
-    private String toLocation; //The end location of the trip
-    private int distanceInKm ;
+    String fromLocation;
 
-    @Enumerated(value = EnumType.STRING)
-    private TripStatus status;
-    private int bill;
+    String toLocation;
 
-    //UNIDIRECTIONAL MAPPING
+    int distanceInKm;
 
-    // TripBooking is child wrt Driver
+    TripStatus status;
+
+    int bill;
+
+
+    //For mapping to customer(parent)
     @ManyToOne
     @JoinColumn
-    private Driver driver;
+    Customer customer;
 
-    // TripBooking is child wrt Customer
+    //For mapping to driver(parent)
     @ManyToOne
     @JoinColumn
-    private Customer customer;
+    Driver driver;
 
+    public TripBooking() {
+
+    }
+
+    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Customer customer, Driver driver) {
+        this.tripBookingId = tripBookingId;
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
+        this.distanceInKm = distanceInKm;
+        this.status = status;
+        this.bill = bill;
+        this.customer = customer;
+        this.driver = driver;
+    }
 
     public int getTripBookingId() {
         return tripBookingId;
@@ -78,19 +93,19 @@ public class TripBooking{
         this.bill = bill;
     }
 
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 }

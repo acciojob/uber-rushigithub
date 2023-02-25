@@ -5,22 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Customer")
 public class Customer{
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    int customerId;
 
-    private String mobile;
-    private String password;
+    String mobile;
 
-    //BIDIRECTIONAL MAPPING
-    // Customer is parent wrt TripBooking
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private List<TripBooking> tripBookingList = new ArrayList<>();
+    String password;
+
+    //For Mapping
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    List<TripBooking> tripBookingList = new ArrayList<>();
 
     public Customer() {
+    }
+
+    public Customer(int customerId, String mobile, String password, List<TripBooking> tripBookingList) {
+        this.customerId = customerId;
+        this.mobile = mobile;
+        this.password = password;
+        this.tripBookingList = tripBookingList;
     }
 
     public int getCustomerId() {
