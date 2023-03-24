@@ -3,32 +3,33 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-public class TripBooking{
+public class TripBooking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tripBookingId;
 
-    private String fromLocation; //The start location of the trip
-    private String toLocation; //The end location of the trip
-    private int distanceInKm ;
+    private String fromLocation;
 
-    @Enumerated(value = EnumType.STRING)
+    private String toLocation;
+
+    private int distanceInKm;
+
+    @Enumerated(EnumType.STRING)
     private TripStatus status;
+
     private int bill;
 
-    //UNIDIRECTIONAL MAPPING
-
-    // TripBooking is child wrt Driver
     @ManyToOne
     @JoinColumn
     private Driver driver;
 
-    // TripBooking is child wrt Customer
     @ManyToOne
     @JoinColumn
     private Customer customer;
 
+    public TripBooking() {
+    }
 
     public int getTripBookingId() {
         return tripBookingId;

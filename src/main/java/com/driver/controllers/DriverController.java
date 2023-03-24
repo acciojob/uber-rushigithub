@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/driver")
 public class DriverController {
-
 	@Autowired
 	DriverService driverService;
 

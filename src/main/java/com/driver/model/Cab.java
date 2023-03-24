@@ -1,6 +1,6 @@
 package com.driver.model;
 
-import javax.persistence.*;
+import javax.persistence.*;;
 
 @Entity
 public class Cab {
@@ -8,17 +8,19 @@ public class Cab {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int perKmRate;
-    private  boolean available;
 
-    // Cab is child wrt Driver
-    // UNIDIRECTIONAL MAPPING
+    private int perKmRate;
+
+    private boolean available;
+
     @OneToOne
     @JoinColumn
-    private Driver driver;
+    Driver driver;
 
     public Cab() {
     }
+
+
 
     public int getId() {
         return id;
